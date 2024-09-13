@@ -16,16 +16,19 @@ const cadastrarMeta = async () => {
 }
 
 const listarMetas = async () => {
+    if(metas.length == 0) {
+        mensagem = 'Não existem metas!'
+        return
+    }
+
     const respostas = await checkbox({
         message: "Use as setas para navegar entre as metas, o espaço para marcar/desmarcar e Enter para finalizar",
         choices: [...metas],
         instructions: false
     })
-
+    
     metas.forEach((m) => {
         m.checked = false
-        // if(metas.length == 0) {}
-        // else {}
     })
 
     if(respostas == 0){
@@ -72,6 +75,11 @@ const metasAbertas = async () => {
 }
 
 const deletarMetas = async () => {
+    if(metas.length == 0) {
+        mensagem = 'Não existem metas!'
+        return
+    }
+
     const metasDesmarcadas = metas.map((meta) => {
         return {value: meta.value, checked: false}
     })
